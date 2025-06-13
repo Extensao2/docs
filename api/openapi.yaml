@@ -1,0 +1,47 @@
+openapi: '3.1.1'
+info:
+  title: Sistema de aprendizagem
+  description: API para gerenciamento de recursos de aprendizagem
+  version: '0.1'
+servers:
+  - url: https://extensaoads2.sj.ifsc.edu.br/api/v1
+paths:
+  /resource/{id}:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/resourceResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+components:
+  schemas:
+    resourceResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: '123e4567-e89b-12d3-a456-426614174000'
+        title:
+          type: string
+          example: 'Sample resource'
+        content:
+          type: string
+          format: base64
+          example: 'VGhpcyBpcyBhIHNhbXBsZSBjb250ZW50IGZvciB0aGUgcmVzb3VyY2U='
+  securitySchemes:
+    userAuth:
+      flows:
+        implicit:
+          authorizationUrl: https://auth.server.test/oauth/authorize
+          scopes:
+            read: Grants read access
+      type: oauth2
