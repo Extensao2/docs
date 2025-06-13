@@ -8,9 +8,6 @@ servers:
 paths:
   /resource/{id}:
     get:
-      security:
-        - userAuth:
-            - read
       responses:
         '200':
           description: OK
@@ -24,6 +21,10 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+security:
+  - userAuth: 
+      - read
+      - write
 components:
   schemas:
     resourceResponse:
