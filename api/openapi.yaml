@@ -8,6 +8,9 @@ servers:
 paths:
   /resource/{id}:
     get:
+      security:
+        - userAuth:
+            - read
       responses:
         '200':
           description: OK
@@ -44,4 +47,5 @@ components:
           authorizationUrl: https://auth.server.test/oauth/authorize
           scopes:
             read: Grants read access
+            write: Grants write access
       type: oauth2
